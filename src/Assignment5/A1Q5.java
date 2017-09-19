@@ -13,10 +13,14 @@ import becker.robots.Robot;
  * @author gavra1029
  */
 public class A1Q5 {
+    
+    public static void main(String[] args){
     //make city
     City obo = new City();
     //make robots 
     Robot ob = new Robot(obo,3,3,Direction.EAST );
+
     
     
+}
 }
