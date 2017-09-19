@@ -28,5 +28,22 @@ public class A1Q4 {
         new Wall(alexendoor,1,1,Direction.SOUTH);
         Robot ob = new Robot(alexendoor,0,0,Direction.SOUTH);
         Robot bob = new Robot(alexendoor,0,1,Direction.SOUTH);
+        //move
+        ob.move(); 
+        ob.move();
+        ob.turnLeft();
+        ob.move();
+        bob.move();
+        bob.turnLeft();
+        bob.move();
+        bob.turnLeft();
+        bob.turnLeft();
+        bob.turnLeft();
+        bob.move();
+        bob.turnLeft();
+        bob.turnLeft();
+        bob.turnLeft();
+        bob.move();
+        
     }
 }
