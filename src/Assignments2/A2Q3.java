@@ -34,8 +34,8 @@ public class A2Q3 {
         while(ob.getDirection()!=Direction.WEST ){
             ob.turnLeft();
         }
-        while(ob.getStreet()!=0 ){
-            ob.getAvenue();
+        while(ob.getAvenue()!=0 ){
+            ob.move();
         }
     }
 }
