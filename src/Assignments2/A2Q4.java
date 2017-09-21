@@ -45,22 +45,21 @@ public class A2Q4 {
         new Wall(q, 4, 4, Direction.NORTH);
         new Wall(q, 4, 4, Direction.SOUTH);
         //make Robot
-        Robot ob = new Robot(q, 0, 0, Direction.EAST);
+        Robot ob = new Robot(q, 0, 1, Direction.EAST);
         //make a loop for the robot to go around the building\
-        ob.move();
-        while (ob.frontIsClear()) {
-            ob.move();
-            ob.turnLeft();
-            ob.turnLeft();
-            ob.turnLeft();
-        
-            if (!ob.frontIsClear()) {
+        while (true) {
+            if (ob.frontIsClear()) {
+                ob.move();
                 ob.turnLeft();
                 ob.turnLeft();
-
-
-
-
+                ob.turnLeft();
+                ob.move();
+            } else {
+                if (!ob.frontIsClear()) {
+                    ob.turnLeft();
+                    ob.move();
+                    ob.turnLeft();
+                }
             }
         }
     }
