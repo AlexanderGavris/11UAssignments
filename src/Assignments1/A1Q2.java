@@ -21,7 +21,7 @@ public class A1Q2 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        //make a city
          City alexendoor= new City ();
          
          //add a robot 
@@ -39,7 +39,7 @@ public class A1Q2 {
        
        //add object
        new Thing(alexendoor,2,2);
-       
+       //tell object to move
        ob.turnLeft();
        ob.turnLeft();
        ob.turnLeft();
