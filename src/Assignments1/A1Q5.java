@@ -36,7 +36,7 @@ public class A1Q5 {
     new Thing(obo,2,2);
     //lable o
     o.setLabel("M");
-    //move robots
+    //move robot o
     o.move();
     o.pickThing();
     o.turnLeft();
@@ -59,6 +59,7 @@ public class A1Q5 {
     o.move();
     o.turnLeft();
     o.turnLeft();
+    //move robot ob
     ob.turnLeft();
     ob.turnLeft();
     ob.move();
