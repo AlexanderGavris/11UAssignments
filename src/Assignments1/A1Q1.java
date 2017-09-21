@@ -34,6 +34,7 @@ public class A1Q1 {
        new Wall(alexendoor,2,2,Direction.SOUTH);
        new Wall (alexendoor,2,2, Direction.EAST);
        new Wall (alexendoor,1,2,Direction.EAST); 
+       //tell robot to move
        ob.move();
        ob.move();
        ob.turnLeft();
