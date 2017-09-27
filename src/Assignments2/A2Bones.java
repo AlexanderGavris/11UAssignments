@@ -64,22 +64,6 @@ public class A2Bones {
         new Wall(o, 9, 2, Direction.SOUTH);
         new Wall(o, 9, 2, Direction.EAST);
         new Wall(o, 9, 2, Direction.WEST);
-        new Wall(o, 0, 1, Direction.EAST);
-        new Wall(o, 1, 1, Direction.EAST);
-        new Wall(o, 2, 1, Direction.EAST);
-        new Wall(o, 3, 1, Direction.EAST);
-        new Wall(o, 4, 1, Direction.EAST);
-        new Wall(o, 5, 1, Direction.EAST);
-        new Wall(o, 6, 1, Direction.EAST);
-        new Wall(o, 7, 1, Direction.EAST);
-        new Wall(o, 8, 1, Direction.EAST);
-        new Wall(o, 9, 1, Direction.EAST);
-      
-                
-        
-
-
-
         //put "snow" in (Things)
         new Thing(o, 1, 2);
         new Thing(o, 1, 3);
@@ -100,34 +84,31 @@ public class A2Bones {
         //make new robot
         Robot ob = new Robot(o, 0, 2, Direction.SOUTH);
         // tell the robot to pick thing up
-        while (true) {
+        while (ob.frontIsClear()) {
             ob.move();
-            while (ob.canPickThing()) {
-                ob.pickThing();
-                ob.turnLeft();
-            }
-            while (true) {
+            ob.turnLeft();
+
+            while (ob.frontIsClear()) {
                 if (ob.canPickThing()) {
                     ob.pickThing();
-                    ob.move();
-                } else if (ob.frontIsClear()) {
-                    ob.move();
-                } else {
-                    while (ob.getDirection() != Direction.WEST) {
-                        ob.turnLeft();
-                    }
-                    while (ob.getAvenue() != 2) {
-                        ob.move();
-                    }
-                    
-
-
+                }
+                ob.move();
+            }
+            if (!ob.frontIsClear()) {
+                if (ob.canPickThing()) {
+                    ob.pickThing();
                 }
             }
+            while (ob.getDirection() != Direction.WEST) {
+                ob.turnLeft();
+            }
 
+            while (ob.getAvenue() != 2) {
+                ob.move();
 
+            }
+            ob.turnLeft();
         }
-
-
+        ob.putThing();
     }
 }
