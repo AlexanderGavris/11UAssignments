@@ -84,24 +84,29 @@ public class A2Bones {
         //make new robot
         Robot ob = new Robot(o, 0, 2, Direction.SOUTH);
         // tell the robot to pick thing up
+        //check for drive way 
         while (ob.frontIsClear()) {
             ob.move();
             ob.turnLeft();
-
+            //if thing is infront pick thing
             while (ob.frontIsClear()) {
                 if (ob.canPickThing()) {
                     ob.pickThing();
                 }
+                //move robot
                 ob.move();
+                //for the edge thing
             }
             if (!ob.frontIsClear()) {
                 if (ob.canPickThing()) {
                     ob.pickThing();
                 }
             }
+            //needs to face west
             while (ob.getDirection() != Direction.WEST) {
                 ob.turnLeft();
             }
+            //robot moves to avenue 2
 
             while (ob.getAvenue() != 2) {
                 ob.move();
@@ -109,6 +114,7 @@ public class A2Bones {
             }
             ob.turnLeft();
         }
+        //put snow at the end of the drive way
         ob.putThing();
     }
 }

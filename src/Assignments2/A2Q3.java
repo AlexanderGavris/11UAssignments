@@ -30,10 +30,12 @@ public class A2Q3 {
         while(ob.getStreet()!=0 ){
            ob.move(); 
         }
+        //make robot turn
         ob.turnLeft();
         while(ob.getDirection()!=Direction.WEST ){
             ob.turnLeft();
         }
+        //tell robot to move to avenue 2
         while(ob.getAvenue()!=0 ){
             ob.move();
         }
