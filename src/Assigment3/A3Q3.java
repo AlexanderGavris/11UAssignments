@@ -20,7 +20,8 @@ public class A3Q3 {
     public static void main(String[] args) {
         //make city
         City kw = new City();
-        //make a robot
+        //make a robot 
+        
         Robot ob = new Robot(kw, 1, 1, Direction.EAST, 20);
         //make robot put things down in a 4 by 5 sqaure 
         while (ob.countThingsInBackpack() > 0) {
