@@ -40,7 +40,7 @@ public class A2Q2 {
         new Thing(q, 3, 8);
         //make a robot
         Robot ob = new Robot(q, 3, 1, Direction.EAST);
-        //make hime move only over the herdel 
+        //make him move only over the herdel 
         while (!ob.canPickThing()) {
             if (ob.frontIsClear()) {
                 ob.move();
