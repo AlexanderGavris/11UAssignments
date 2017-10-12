@@ -37,27 +37,26 @@ public class Quizs {
         new Thing(mine, 1, 4);
         new Thing(mine, 1, 5);
         //make the worker turn back every thime he pickes up the debris 
-        while (Alex.frontIsClear()) {
+
+
+
+
+        while (!Alex.canPickThing()) {
             Alex.move();
+
+
 
             if (Alex.canPickThing()) {
                 Alex.pickThing();
                 Alex.turnLeft();
                 Alex.turnLeft();
-
             } else {
-                if (!Alex.frontIsClear()) {
-                    Alex.turnLeft();
+                if(!Alex.frontIsClear()){ 
                     Alex.putThing();
                     Alex.turnLeft();
+                    Alex.turnLeft();
                 }
-                
-               
-
             }
-
         }
-
-
     }
 }
