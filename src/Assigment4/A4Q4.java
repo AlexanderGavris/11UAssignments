@@ -35,6 +35,7 @@ public class A4Q4 {
          //divided by the total by the price of the ticket 
          double tickets=total/35;
          tickets = Math.ceil(tickets);
+         //tell the user how many tickets they need 
          System.out.println(tickets+"This is how many tickets youu need");
          
     }

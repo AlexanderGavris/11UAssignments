@@ -41,22 +41,43 @@ public class Quizs {
 
 
 
-        while (!Alex.canPickThing()) {
+        while (Alex.frontIsClear()) {
             Alex.move();
-
-
-
+            
+            
+            
             if (Alex.canPickThing()) {
+                
+                
+
                 Alex.pickThing();
                 Alex.turnLeft();
                 Alex.turnLeft();
+                while (Alex.getAvenue() != 0) {
+                    Alex.move();
+                    
+                    
+                }
+                Alex.putThing();
+                Alex.turnLeft();
+                Alex.turnLeft();
+                
+                
             } else {
-                if(!Alex.frontIsClear()){ 
-                    Alex.putThing();
+                if (!Alex.frontIsClear()) {
                     Alex.turnLeft();
                     Alex.turnLeft();
+                    
+                    
+
+                    while (Alex.getAvenue() != 0) {
+                        Alex.move();
+                    }
                 }
             }
+
         }
+        Alex.turnLeft();
+        Alex.turnLeft();
     }
 }
