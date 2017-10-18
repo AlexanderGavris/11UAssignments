@@ -52,11 +52,24 @@ public class A4Q5 {
          
         //caluate your test %
         double average1=firstTest/totalTest1*100;
+        double average2=seccondTest/totalTest1*100;
+        double average3=thirdTest/totalTest1*100;
+        double average4=forthTest/totalTest1*100;
+        double average5=fivthTest/totalTest1*100;
          
        
         
         //output all the scores 
          System.out.println("Test1:"+average1);
-        
+         System.out.println("Test2:"+average2);
+         System.out.println("Test3:"+average3);
+         System.out.println("Test4:"+average4);
+         System.out.println("Test5:"+average5);
+         //the totalaverage 
+        double totalAverage=firstTest+seccondTest+thirdTest+forthTest+fivthTest/5;
+        double totalTest= totalAverage*100;
+        //tell the user the total average
+         System.out.println();
+                
     }
 }
