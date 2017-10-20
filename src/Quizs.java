@@ -53,7 +53,7 @@ public class Quizs {
                 Alex.pickThing();
                 Alex.turnLeft();
                 Alex.turnLeft();
-                while (Alex.getAvenue() != 0) {
+                while (Alex.getAvenue() != 1) {
                     Alex.move();
                     
                     
