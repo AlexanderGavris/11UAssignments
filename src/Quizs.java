@@ -36,11 +36,11 @@ public class Quizs {
         new Thing(mine, 1, 3);
         new Thing(mine, 1, 4);
         new Thing(mine, 1, 5);
-         //make the worker turn back every time he picks up the debris 
+        //make the worker turn back every time he picks up the debris 
 
         while (Alex.frontIsClear()) {
             Alex.move();
-                       
+
             if (Alex.getAvenue() == 1) {
                 Alex.turnLeft();
                 Alex.putThing();
@@ -49,28 +49,28 @@ public class Quizs {
 
             }
             if (Alex.canPickThing()) {
-                                
+
 
                 Alex.pickThing();
                 Alex.turnLeft();
                 Alex.turnLeft();
                 while (Alex.getAvenue() != 1) {
                     Alex.move();
-                    
-                    
+
+
                 }
 //go back outside the mine 
                 Alex.putThing();
                 Alex.turnLeft();
                 Alex.turnLeft();
-                
-                
+
+
             } else {
                 if (!Alex.frontIsClear()) {
                     Alex.turnLeft();
                     Alex.turnLeft();
-                    
-                    
+
+
 
                     while (Alex.getAvenue() != 0) {
                         Alex.move();
