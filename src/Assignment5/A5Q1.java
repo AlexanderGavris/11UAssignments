@@ -21,8 +21,10 @@ public class A5Q1 {
         
         
         System.out.println("Enter a word to translate");
-         int tWord = input.nextInt();
+         String tWord = input.nextLine();
          
+         
+         tWord.
          
          
          
@@ -30,8 +32,8 @@ public class A5Q1 {
         tWord = tWord.toLowerCase();
         
         // see if word starts with a vowel
-        if(tWord.startsWith("a") || tWord.startsWith("e") || word.startsWith("i") 
-                || tWord.startsWith("o") || word.startsWith("u")){
+        if(tWord.startsWith("a") || tWord.startsWith("e") || Tword.startsWith("i") 
+                || tWord.startsWith("o") || tWord.startsWith("u")){
             
         }
         
