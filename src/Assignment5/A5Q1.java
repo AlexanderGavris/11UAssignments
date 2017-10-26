@@ -18,32 +18,38 @@ public class A5Q1 {
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner input = new Scanner(System.in);
-        
-        
+
+
         System.out.println("Enter a word to translate");
-         String tWord = input.nextLine();
-         
-         
-         tWord.
-         
-         
-         
-          // convert to lowercase
+        String tWord = input.nextLine();
+
+
+
+
+
+
+        // convert to lowercase
         tWord = tWord.toLowerCase();
-        
-        // see if word starts with a vowel
-        if(tWord.startsWith("a") || tWord.startsWith("e") || Tword.startsWith("i") 
-                || tWord.startsWith("o") || tWord.startsWith("u")){
+        String translated = "";
+        for (int i = 0; i < tWord.length(); i++) {
+            // look for a vowel at spot i
+            if (tWord.charAt(i) == 'a' || tWord.charAt(i) == 'e' || tWord.charAt(i) == 'i'
+                    || tWord.charAt(i) == 'o' || tWord.charAt(i) == 'u') {
+                
+                 
+                    // assemble translation
+                    translated = translated+"ub"+tWord.charAt(i);
+                
+            } else{
+                translated = translated+ tWord.charAt(i);
+            }
             
+                    
+
+
+
+
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
+         System.out.println(tWord + " in Ubbi Dubbi is " + translated);
     }
 }
