@@ -35,21 +35,32 @@ public class A5Q1 {
             // look for a vowel at spot i
             if (tWord.charAt(i) == 'a' || tWord.charAt(i) == 'e' || tWord.charAt(i) == 'i'
                     || tWord.charAt(i) == 'o' || tWord.charAt(i) == 'u') {
+
+
+                // assemble translation
+                translated = translated + "ub" + tWord.charAt(i);
+
+            } else {
+                translated = translated + tWord.charAt(i);
                 
-                 
-                    // assemble translation
-                    translated = translated+"ub"+tWord.charAt(i);
                 
-            } else{
-                translated = translated+ tWord.charAt(i);
+                
             }
-            
-                    
+            if (i >= 1) {
+                if (tWord.charAt(i+1 ) == 'a' || tWord.charAt(i+1) == 'e' || tWord.charAt(i+1) == 'i'
+                        || tWord.charAt(i +1 ) == 'o' || tWord.charAt(i+1) == 'u') {
 
 
-
+             
+                }
+            }
 
         }
-         System.out.println(tWord + " in Ubbi Dubbi is " + translated);
+        
+        
+        
+        
+        System.out.println(tWord + " in Ubbi Dubbi is " + translated);
+
     }
 }
