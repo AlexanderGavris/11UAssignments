@@ -22,6 +22,7 @@ public class A5Q1 {
 
         System.out.println("Enter a word to translate");
         String tWord = input.nextLine();
+        boolean foundVowel = false;
 
 
 
@@ -30,29 +31,39 @@ public class A5Q1 {
 
         // convert to lowercase
         tWord = tWord.toLowerCase();
+        
+        if(tWord.equals ("EXIT")){
+            Brake 
+        }
+        
+        
         String translated = "";
         for (int i = 0; i < tWord.length(); i++) {
             // look for a vowel at spot i
             if (tWord.charAt(i) == 'a' || tWord.charAt(i) == 'e' || tWord.charAt(i) == 'i'
-                    || tWord.charAt(i) == 'o' || tWord.charAt(i) == 'u') {
+                    || tWord.charAt(i) == 'o' || tWord.charAt(i) == 'u' && foundVowel==false ){
+                
+                 
 
 
                 // assemble translation
                 translated = translated + "ub" + tWord.charAt(i);
+                foundVowel=true; 
 
             } else {
                 translated = translated + tWord.charAt(i);
                 
+                while (i >= 1) {
+                if (tWord.charAt(i ) == 'a' || tWord.charAt(i) == 'e' || tWord.charAt(i) == 'i'
+                        || tWord.charAt(i) == 'o' || tWord.charAt(i) == 'u') {
                 
                 
             }
-            if (i >= 1) {
-                if (tWord.charAt(i+1 ) == 'a' || tWord.charAt(i+1) == 'e' || tWord.charAt(i+1) == 'i'
-                        || tWord.charAt(i +1 ) == 'o' || tWord.charAt(i+1) == 'u') {
-
+             
+                    
 
              
-                }
+                } 
             }
 
         }
