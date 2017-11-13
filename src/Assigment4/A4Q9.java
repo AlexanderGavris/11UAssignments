@@ -29,9 +29,9 @@ public class A4Q9 extends javax.swing.JFrame {
         First = new javax.swing.JLabel();
         Seccond = new javax.swing.JLabel();
         Result = new javax.swing.JLabel();
-        number1 = new javax.swing.JTextField();
-        number2 = new javax.swing.JTextField();
-        number3 = new javax.swing.JTextField();
+        numberOne = new javax.swing.JTextField();
+        numberTwo = new javax.swing.JTextField();
+        numberThree = new javax.swing.JTextField();
         Add = new javax.swing.JButton();
         Sub = new javax.swing.JButton();
         Mul = new javax.swing.JButton();
@@ -45,15 +45,15 @@ public class A4Q9 extends javax.swing.JFrame {
 
         Result.setText("Result");
 
-        number1.addActionListener(new java.awt.event.ActionListener() {
+        numberOne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                number1ActionPerformed(evt);
+                numberOneActionPerformed(evt);
             }
         });
 
-        number3.addActionListener(new java.awt.event.ActionListener() {
+        numberThree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                number3ActionPerformed(evt);
+                numberThreeActionPerformed(evt);
             }
         });
 
@@ -110,9 +110,9 @@ public class A4Q9 extends javax.swing.JFrame {
                         .addComponent(Div, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(number3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                        .addComponent(number2, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(number1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(numberThree, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                        .addComponent(numberTwo, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(numberOne, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,15 +121,15 @@ public class A4Q9 extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(First)
-                    .addComponent(number1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numberOne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Seccond)
-                    .addComponent(number2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numberTwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Result)
-                    .addComponent(number3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numberThree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Add)
@@ -143,52 +143,71 @@ public class A4Q9 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DivActionPerformed
-        // TODO add your handling code here:
-        String text = number1.getText();
-        String text2 = number2.getText();
-        int answer = Integer.parseInt(text);
-        int answer2 = Integer.parseInt(text2);
-        int divide = answer / answer2;
-        number3.setText(String.valueOf(divide));
+       
+        
+        
+        //divide number One and Two
+        String text = numberOne.getText();    
+        String text2 = numberTwo.getText();
+        
+        int answerOne = Integer.parseInt(text);
+        int answerTwo = Integer.parseInt(text2);
+        int divide = answerOne / answerTwo;
+        
+        numberThree.setText(String.valueOf(divide));
     }//GEN-LAST:event_DivActionPerformed
 
-    private void number1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number1ActionPerformed
+    private void numberOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_number1ActionPerformed
+    }//GEN-LAST:event_numberOneActionPerformed
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        String text = number1.getText();
-        String text2 = number2.getText();
-        int answer = Integer.parseInt(text);
-        int answer2 = Integer.parseInt(text2);
-        int sum = answer + answer2;
-        number3.setText(String.valueOf(sum));        
+         //I have to subtract number 1 and number 2  
+        
+        String text = numberOne.getText();
+        String text2 = numberTwo.getText();
+        
+        int answerOne = Integer.parseInt(text);
+        int answerTwo = Integer.parseInt(text2);
+        int sum = answerOne + answerTwo;
+        
+        
+        numberThree.setText(String.valueOf(sum));
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_AddActionPerformed
 
-    private void number3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number3ActionPerformed
+    private void numberThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberThreeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_number3ActionPerformed
+    }//GEN-LAST:event_numberThreeActionPerformed
 
     private void SubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubActionPerformed
-        // TODO add your handling code here:
+        // I have to subtract number 1 and number 2
         
-        String text = number1.getText();
-        String text2 = number2.getText();
-        int answer = Integer.parseInt(text);
-        int answer2 = Integer.parseInt(text2);
-        int difference = answer - answer2;
-        number3.setText(String.valueOf(difference));
+        
+        String text = numberOne.getText();
+        String text2 = numberTwo.getText();
+        
+        
+        int answerOne = Integer.parseInt(text);
+        int answerTwo = Integer.parseInt(text2);
+        int difference = answerOne - answerTwo;
+        
+        numberThree.setText(String.valueOf(difference));
     }//GEN-LAST:event_SubActionPerformed
 
     private void MulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MulActionPerformed
-        // TODO add your handling code here:
-        String text = number1.getText();
-        String text2 = number2.getText();
-        int answer = Integer.parseInt(text);
-        int answer2 = Integer.parseInt(text2);
-        int multiply = answer * answer2;
-        number3.setText(String.valueOf(multiply));
+        // Times numberOne and NumberTwo
+        String text = numberOne.getText();
+        String text2 = numberTwo.getText();
+        
+        int answerOne = Integer.parseInt(text);
+        int answerTwo = Integer.parseInt(text2);
+        int multiply = answerOne * answerTwo;
+        
+        
+        
+        numberThree.setText(String.valueOf(multiply));
     }//GEN-LAST:event_MulActionPerformed
 
     /**
@@ -233,8 +252,8 @@ public class A4Q9 extends javax.swing.JFrame {
     private javax.swing.JLabel Result;
     private javax.swing.JLabel Seccond;
     private javax.swing.JButton Sub;
-    private javax.swing.JTextField number1;
-    private javax.swing.JTextField number2;
-    private javax.swing.JTextField number3;
+    private javax.swing.JTextField numberOne;
+    private javax.swing.JTextField numberThree;
+    private javax.swing.JTextField numberTwo;
     // End of variables declaration//GEN-END:variables
 }
