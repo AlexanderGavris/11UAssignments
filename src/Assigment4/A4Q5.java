@@ -22,6 +22,7 @@ public class A4Q5 {
         System.out.println("What was the first test out of ?");
         double totalTest1 = input.nextDouble();
         
+        
         System.out.println("What did you get on your test ?");
         double firstTest = input.nextDouble();
         
