@@ -95,21 +95,11 @@ public class A4Q10 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xActionPerformed
-// convert celsius to farenheit
-        String text = farenheit.getText();
-        //number into text box
-        int answer = Integer.parseInt(text);
-        //time by 33.8
-        double convert = *1.celsius8+32; 
-        celsius .setText(String.valueOf(convert));
+
     }//GEN-LAST:event_xActionPerformed
 
     private void xdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xdActionPerformed
-    String text = farenheit.getText();
-        double answer = Double.parseDouble(text);
-        //divide by 33.8
-        double convert = answer / 33.8;
-        celsius.setText(String.valueOf(convert));
+   
     }//GEN-LAST:event_xdActionPerformed
 
     /**
