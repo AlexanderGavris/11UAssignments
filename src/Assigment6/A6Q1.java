@@ -37,7 +37,7 @@ public class A6Q1 {
         for (int i = 0; i < students.length; i++) {
             // add expense to total
             total = total + students[i];
-            // calculate number of tickets to sell
+            // calculate number of averge mark 
 
 
         }
