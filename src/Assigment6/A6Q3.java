@@ -22,9 +22,16 @@ public class A6Q3 {
         // find the amount of people
         System.out.println("Please enter two numbers:");
         int twoNum = input.nextInt();
-        int twoNum = input.nextInt();
+        int numTwo = input.nextInt();
         //make a arrey to store the hight of the people
-        double[] peopleHight = new double[2];
+        double[] dNum = new double[2];
+        String[] sNum = new String[6];
+              
+         sNum[0] = "1st person";
+        sNum[1] = "2end person";
+        
+        
+        
         
         
         
