@@ -17,35 +17,44 @@ public class A6Q3 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
         Scanner input = new Scanner(System.in);
         // find the amount of people
         System.out.println("Please enter two numbers:");
-        int twoNum = input.nextInt();
+        int numOne = input.nextInt();
         int numTwo = input.nextInt();
-        //make a arrey to store the hight of the people
-        double[] dNum = new double[2];
-        String[] sNum = new String[6];
-              
-         sNum[0] = "1st person";
-        sNum[1] = "2end person";
+        //make a arrey to store numOne numTwo
         
+        int[] dNum = new int[2];
+        dNum[0]=numOne;
+        dNum[1]=numTwo;
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        //make to make 
+        if (dNum[0] > dNum[1]) {
+            int tempNum = dNum[0] ;
+            dNum[0]=dNum[1];
+            dNum[1]=tempNum; 
+            
+            
+        }
+        System.out.println("Your #s in order are:"+ dNum[0] + ","+ dNum[1] );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
