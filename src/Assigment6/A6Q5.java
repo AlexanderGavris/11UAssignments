@@ -58,11 +58,18 @@ public class A6Q5 {
         // find the mediean of the array
             if(amountmarks % 2 == 0){
                 //this mean the num is even 
-                System.out.println(mark[amountmarks/2]);
+                int firstNum = (mark[amountmarks/2]);
+                int secondNum = (mark[amountmarks/2 - 1]);
+                double total= (firstNum + secondNum)/2.0 ; 
+                
+                
+                
+                System.out.println("the median is : "+ total );
+                
          
             }else{
                 //this means the num is odd
-                System.out.println(mark[amountmarks/2]);
+                System.out.println("the median is: " + mark[amountmarks/2]);
                 
             }
     }
