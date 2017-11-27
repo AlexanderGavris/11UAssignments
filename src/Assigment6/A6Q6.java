@@ -46,8 +46,20 @@ public class A6Q6 {
             }
 
         }
+        //print out the lowest and highest 
+        System.out.println("This is the lowest mark: " + mark[0]);
+        System.out.println("This the highest: " + mark[amountmarks -1]);
         
-        
+        //add all the marks together
+        double total = 0;
+        // go through each student
+        for (int i = 0; i < mark.length; i++) {
+            // add expense to total
+            total = total + mark[i];
+            // calculate number of averge mark 
+           total=total/amountmarks;
+        }
+        System.out.println("this is average: "+ total);
         
         
         
