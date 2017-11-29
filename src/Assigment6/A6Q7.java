@@ -20,22 +20,20 @@ public class A6Q7 {
         Scanner input = new Scanner(System.in);
         //ask to enter #'s 
         System.out.println("How many numbers do you want to enter:");
-        int amountnum = input.nextInt();
 
-        int[] num = new int[amountnum];
-        
-        for (int i = 0; i < 10; i++) {
-            
+        int[] num = new int[999];
+        //fill array
+        for (int i = 0; i < num.length; i++) {
+            num[i]=i+2;
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
+        for (int i = 0; i < num.length; i++) {
+            if(num[i]!=0){
+                for (int j = 2; j < num.length; j++) {
+                    
+                }
+            }
+        }
     }
     
 }
