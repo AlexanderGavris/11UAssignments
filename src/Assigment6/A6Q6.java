@@ -59,7 +59,7 @@ public class A6Q6 {
             // calculate number of averge mark 
            total=total/amountmarks;
         }
-        System.out.println("this is average: "+ total);
+        System.out.println("this is median: "+ total);
         
         
         

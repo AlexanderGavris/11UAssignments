@@ -18,22 +18,30 @@ public class A6Q7 {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        //ask to enter #'s 
-        System.out.println("How many numbers do you want to enter:");
+        //make an array that goes up to 1000
+        int[] numbers = new int[1001];
 
-        int[] num = new int[999];
-        //fill array
-        for (int i = 0; i < num.length; i++) {
-            num[i]=i+2;
+        //filled the array starting at 2
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = i;
         }
-        
-        for (int i = 0; i < num.length; i++) {
-            if(num[i]!=0){
-                for (int j = 2; j < num.length; j++) {
-                    
+        for (int x = 2; x < numbers.length; x++) {
+            if (numbers[x] != 0) {
+
+                int p = numbers[x];
+                
+
+                //make a for loop to count multi #s
+                for (int i = 2; i * p < numbers.length; i++) {
+                    numbers[i * p] = 0;
                 }
+                //print out what all the prim numbers
+                
+                System.out.println("The prime numbers are " + numbers[x]);
             }
         }
+
+
+
     }
-    
 }
