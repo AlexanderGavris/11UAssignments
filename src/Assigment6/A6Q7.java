@@ -29,12 +29,12 @@ public class A6Q7 {
         for (int x = 2; x < num.length; x++) {
             if (num[x] != 0) {
 
-                int p = num[x];
+                int prime = num[x];
 
 
                 //make a for loop to count multi #s
-                for (int i = 2; i * p < num.length; i++) {
-                    num[i * p] = 0;
+                for (int i = 2; i * prime < num.length; i++) {
+                    num[i * prime] = 0;
                 }
                 //print out what all the prim numbers
 
