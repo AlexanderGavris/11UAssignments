@@ -39,6 +39,17 @@ public class sexcHiker extends JComponent {
     // YOUR GAME VARIABLES WOULD GO HERE
     //player var
     Rectangle player = new Rectangle(80,700,40, 80);
+    Rectangle hammer = new Rectangle(20, 30, 10, 20);
+     //displacement in the x and y direction 
+    int playerDX = 0;
+    int playerDY = 0;
+    //gavity strenght
+    int gravity= 1;
+     //controll for player
+    boolean left= false;
+    boolean right= false;
+    boolean jump= false;
+    boolean onGround= false;
 
     
 
@@ -81,6 +92,11 @@ public class sexcHiker extends JComponent {
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
         // GAME DRAWING GOES HERE
+        //coulor for player
+        g.setColor(Color.BLUE);
+        g.fillRect(player.x, player.y, player.width, player.height);
+        //colour for hammer
+        g.setColor(Color.DARK_GRAY);
         
         
         // GAME DRAWING ENDS HERE
@@ -114,7 +130,21 @@ public class sexcHiker extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-            
+             if(right){
+                playerDX=1;
+            }else if(left){
+                playerDX=-1;
+                
+            }else{
+                playerDX=0;
+            }
+            //jump
+            if(onGround &&jump){
+                //do someting ab jumping
+                //big neg num to start move 
+                playerDY = -10;
+                onGround=false;
+            }
             
             // GAME LOGIC ENDS HERE 
             // update the drawing (calls paintComponent)
