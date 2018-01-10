@@ -38,8 +38,14 @@ public class sexcHiker extends JComponent {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     //player var
-    Rectangle player = new Rectangle(80,700,40, 80);
-    Rectangle hammer = new Rectangle(20, 30, 10, 20);
+    Rectangle player = new Rectangle(80,400,40, 80);
+    
+    
+    
+    
+    
+    //make a hammer 
+    int hammer = 0; 
      //displacement in the x and y direction 
     int playerDX = 0;
     int playerDY = 0;
@@ -50,6 +56,8 @@ public class sexcHiker extends JComponent {
     boolean right= false;
     boolean jump= false;
     boolean onGround= false;
+    
+    int mx, my;
 
     
 
@@ -97,6 +105,11 @@ public class sexcHiker extends JComponent {
         g.fillRect(player.x, player.y, player.width, player.height);
         //colour for hammer
         g.setColor(Color.DARK_GRAY);
+        
+        g.fillRect(mx, my, 20, 20);
+        
+        g.setColor(Color.RED);
+        g.fillRect(player.width , player.height, 150,1);
         
         
         // GAME DRAWING ENDS HERE
@@ -146,6 +159,14 @@ public class sexcHiker extends JComponent {
                 onGround=false;
             }
             
+            // making the hammer rotate rounf the play useing trig
+            //find center of player
+              int centerPlayer=player.y-player.height; 
+               
+            
+            
+            
+            
             // GAME LOGIC ENDS HERE 
             // update the drawing (calls paintComponent)
             repaint();
@@ -191,7 +212,8 @@ public class sexcHiker extends JComponent {
         // if the mouse has moved positions
         @Override
         public void mouseMoved(MouseEvent e){
-            
+            mx = e.getX();
+            my = e.getY();
         }
     }
     
@@ -200,14 +222,29 @@ public class sexcHiker extends JComponent {
         // if a key has been pressed down
         @Override
         public void keyPressed(KeyEvent e){
-            
+            int key= e.getKeyCode();
+            //key is what u pressed
+            if(key==KeyEvent.VK_D){
+                right=true;
+            }else if(key==KeyEvent.VK_A){
+                left=true;
+            }else if(key==KeyEvent.VK_SPACE){
+                jump=true;
+            }
         }
         
         // if a key has been released
         @Override
         public void keyReleased(KeyEvent e){
-            
+            int key= e.getKeyCode();
+            if(key==KeyEvent.VK_D){
+                right=false;
+            }else if(key==KeyEvent.VK_A){
+                left=false;
+            }else if(key==KeyEvent.VK_SPACE){
+                jump=false;
         }
+    }
     }
     
     
