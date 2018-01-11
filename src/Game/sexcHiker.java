@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Game;
 
 import java.awt.Dimension;
@@ -26,47 +25,41 @@ public class sexcHiker extends JComponent {
     // Height and Width of our game
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
-    
     //Title of the window
     String title = "My Game";
-
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
     long desiredFPS = 60;
     long desiredTime = (1000) / desiredFPS;
-
-
     // YOUR GAME VARIABLES WOULD GO HERE
     //player var
-    Rectangle player = new Rectangle(80,400,40, 80);
-    
-    
-    
-    
-    
+    Rectangle player = new Rectangle(80, 400, 40, 80);
+    //make a var the reps my angle
+    double theta = 0;
     //make a hammer 
-    int hammer = 0; 
-     //displacement in the x and y direction 
+    int hammer = 0;
+    //displacement in the x and y direction 
     int playerDX = 0;
     int playerDY = 0;
     //gavity strenght
-    int gravity= 1;
-     //controll for player
-    boolean left= false;
-    boolean right= false;
-    boolean jump= false;
-    boolean onGround= false;
+    int gravity = 1;
+    //controll for player
+    boolean left = false;
+    boolean right = false;
+    boolean jump = false;
+    boolean onGround = false;
     
+    //where my mouse is
     int mx, my;
-
-    
+    //where the center of the player will be
+    int cx, cy;
+    //setting what the distance will be 
+    double distance=150;
 
     // GAME VARIABLES END HERE   
-
-    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
-    public sexcHiker(){
+    public sexcHiker() {
         // creates a windows to show my game
         JFrame frame = new JFrame(title);
 
@@ -81,16 +74,16 @@ public class sexcHiker extends JComponent {
         frame.pack();
         // shows the window to the user
         frame.setVisible(true);
-        
+
         // add listeners for keyboard and mouse
         frame.addKeyListener(new Keyboard());
         Mouse m = new Mouse();
-        
+
         this.addMouseMotionListener(m);
         this.addMouseWheelListener(m);
         this.addMouseListener(m);
     }
-    
+
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
@@ -105,23 +98,20 @@ public class sexcHiker extends JComponent {
         g.fillRect(player.x, player.y, player.width, player.height);
         //colour for hammer
         g.setColor(Color.DARK_GRAY);
-        
+
         g.fillRect(mx, my, 20, 20);
-        
+
         g.setColor(Color.RED);
-        g.fillRect(player.width , player.height, 150,1);
-        
-        
+        g.fillRect(player.x + player.width / 2, player.y + player.height / 2, 150, 1);
+
+
         // GAME DRAWING ENDS HERE
     }
 
-
     // This method is used to do any pre-setup you might need to do
     // This is run before the game loop begins!
-    public void  preSetup(){
-       // Any of your pre setup before the loop starts should go here
-
-       
+    public void preSetup() {
+        // Any of your pre setup before the loop starts should go here
     }
 
     // The main game loop
@@ -143,30 +133,34 @@ public class sexcHiker extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-             if(right){
-                playerDX=1;
-            }else if(left){
-                playerDX=-1;
-                
-            }else{
-                playerDX=0;
+            if (right) {
+                playerDX = 1;
+            } else if (left) {
+                playerDX = -1;
+
+            } else {
+                playerDX = 0;
             }
             //jump
-            if(onGround &&jump){
+            if (onGround && jump) {
                 //do someting ab jumping
                 //big neg num to start move 
                 playerDY = -10;
-                onGround=false;
+                onGround = false;
             }
-            
+
             // making the hammer rotate rounf the play useing trig
-            //find center of player
-              int centerPlayer=player.y-player.height; 
-               
+            //trig
             
             
             
-            
+            //calulate 
+            double hammerRX = 150 * Math.cos(theta);
+            double hammerRY = 150 * Math.sin(theta);
+
+
+
+
             // GAME LOGIC ENDS HERE 
             // update the drawing (calls paintComponent)
             repaint();
@@ -187,77 +181,71 @@ public class sexcHiker extends JComponent {
         }
     }
 
-    
-
     // Used to implement any of the Mouse Actions
     private class Mouse extends MouseAdapter {
         // if a mouse button has been pressed down
+
         @Override
-        public void mousePressed(MouseEvent e){
-            
+        public void mousePressed(MouseEvent e) {
         }
-        
+
         // if a mouse button has been released
         @Override
-        public void mouseReleased(MouseEvent e){
-            
+        public void mouseReleased(MouseEvent e) {
         }
-        
+
         // if the scroll wheel has been moved
         @Override
-        public void mouseWheelMoved(MouseWheelEvent e){
-            
+        public void mouseWheelMoved(MouseWheelEvent e) {
         }
 
         // if the mouse has moved positions
         @Override
-        public void mouseMoved(MouseEvent e){
+        public void mouseMoved(MouseEvent e) {
             mx = e.getX();
             my = e.getY();
         }
     }
-    
+
     // Used to implements any of the Keyboard Actions
-    private class Keyboard extends KeyAdapter{
+    private class Keyboard extends KeyAdapter {
         // if a key has been pressed down
+
         @Override
-        public void keyPressed(KeyEvent e){
-            int key= e.getKeyCode();
+        public void keyPressed(KeyEvent e) {
+            int key = e.getKeyCode();
             //key is what u pressed
-            if(key==KeyEvent.VK_D){
-                right=true;
-            }else if(key==KeyEvent.VK_A){
-                left=true;
-            }else if(key==KeyEvent.VK_SPACE){
-                jump=true;
+            if (key == KeyEvent.VK_D) {
+                right = true;
+            } else if (key == KeyEvent.VK_A) {
+                left = true;
+            } else if (key == KeyEvent.VK_SPACE) {
+                jump = true;
             }
         }
-        
+
         // if a key has been released
         @Override
-        public void keyReleased(KeyEvent e){
-            int key= e.getKeyCode();
-            if(key==KeyEvent.VK_D){
-                right=false;
-            }else if(key==KeyEvent.VK_A){
-                left=false;
-            }else if(key==KeyEvent.VK_SPACE){
-                jump=false;
+        public void keyReleased(KeyEvent e) {
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_D) {
+                right = false;
+            } else if (key == KeyEvent.VK_A) {
+                left = false;
+            } else if (key == KeyEvent.VK_SPACE) {
+                jump = false;
+            }
         }
     }
-    }
-    
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // creates an instance of my game
         sexcHiker game = new sexcHiker();
-                
+
         // starts the game loop
         game.run();
     }
 }
-
-
