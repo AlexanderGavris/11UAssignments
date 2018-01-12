@@ -37,7 +37,7 @@ public class sexcHiker extends JComponent {
     //make a var the reps my angle
     double theta = 0;
     //make a hammer 
-    int hammer = 0;
+    Rectangle hammer = new Rectangle(mx, my, 20, 20);
     //displacement in the x and y direction 
     int playerDX = 0;
     int playerDY = 0;
@@ -53,6 +53,8 @@ public class sexcHiker extends JComponent {
     int mx, my;
     //where the center of the player will be
     int cx, cy;
+    //general x and y for the hammer
+    int x,y;
     //setting what the distance will be 
     double distance=150;
 
@@ -150,8 +152,19 @@ public class sexcHiker extends JComponent {
             }
 
             // making the hammer rotate rounf the play useing trig
-            //trig
             
+            //setting cx and cy to the center of the plaayer
+            cx = player.x + player.width / 2;
+            cy = player.y + player.height / 2;
+            //cal the x and y postion for the hammer
+            x=mx-cx;
+            y=my-cy;
+            
+            
+            
+            //callulate theta
+            double theta= Math.atan2(y,x);
+            System.out.println("angle: " + Math.toDegrees(theta));
             
             
             //calulate 
