@@ -36,6 +36,15 @@ public class sexcHiker extends JComponent {
     Rectangle player = new Rectangle(80, 400, 40, 80);
     //make a var the reps my angle
     double theta = 0;
+    //where my mouse is
+    int mx, my;
+    //where the center of the player will be
+    int cx, cy;
+    //general x and y for the hammer
+    int distanceOfMouseX,distanceOfMouseY;
+    double hammerX,hammerY;
+    //setting what the distance will be 
+    double distance=0; 
     //make a hammer 
     Rectangle hammer = new Rectangle(mx, my, 20, 20);
     //displacement in the x and y direction 
@@ -48,15 +57,10 @@ public class sexcHiker extends JComponent {
     boolean right = false;
     boolean jump = false;
     boolean onGround = false;
+    //make a arry of rectangles
+    Rectangle[]blocks = new Rectangle[5];
     
-    //where my mouse is
-    int mx, my;
-    //where the center of the player will be
-    int cx, cy;
-    //general x and y for the hammer
-    int x,y;
-    //setting what the distance will be 
-    double distance=150;
+    
 
     // GAME VARIABLES END HERE   
     // Constructor to create the Frame and place the panel in
@@ -100,11 +104,14 @@ public class sexcHiker extends JComponent {
         g.fillRect(player.x, player.y, player.width, player.height);
         //colour for hammer
         g.setColor(Color.DARK_GRAY);
+        //drawing the mouse
+        
 
-        g.fillRect(mx, my, 20, 20);
+        g.fillRect(cx + (int)(hammerX) , cy + (int)(hammerY), 20, 20);
+        //the distance of the hammer
 
-        g.setColor(Color.RED);
-        g.fillRect(player.x + player.width / 2, player.y + player.height / 2, 150, 1);
+        //g.setColor(Color.RED);
+        //g.fillRect(player.x + player.width / 2, player.y + player.height / 2, 150, 1);
 
 
         // GAME DRAWING ENDS HERE
@@ -114,6 +121,15 @@ public class sexcHiker extends JComponent {
     // This is run before the game loop begins!
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
+        blocks[0]=new Rectangle(0,450, 100, 25);
+        blocks[1]=new Rectangle(200,450, 100, 25);
+        blocks[2]=new Rectangle(150,400, 25, 25);
+        blocks[3]=new Rectangle(50,325, 25, 25);
+        blocks[4]=new Rectangle(400,325, 25, 25);
+        
+        
+        
+        
     }
 
     // The main game loop
@@ -157,20 +173,41 @@ public class sexcHiker extends JComponent {
             cx = player.x + player.width / 2;
             cy = player.y + player.height / 2;
             //cal the x and y postion for the hammer
-            x=mx-cx;
-            y=my-cy;
+            distanceOfMouseX=mx-cx;
+            distanceOfMouseY=my-cy;
+            
+            
+            
             
             
             
             //callulate theta
-            double theta= Math.atan2(y,x);
+            double theta= Math.atan2(distanceOfMouseY,distanceOfMouseX);
             System.out.println("angle: " + Math.toDegrees(theta));
             
             
             //calulate 
             double hammerRX = 150 * Math.cos(theta);
             double hammerRY = 150 * Math.sin(theta);
+            //use soh cah toa to find the distance of hammer x and hammer y
+            //find were the mouse is and if it is with in 150 or less than move the mouse useing the distance formula
+            distance=Math.sqrt(distanceOfMouseX*distanceOfMouseX+distanceOfMouseY*distanceOfMouseY);
+            if(distance >= 150){
+                 //calulate hammer x
+            hammerX=Math.cos(theta)*150;
+            //calulate hammer Y
+            hammerY=150*Math.sin(theta);
 
+            }else{
+                      //calulate hammer x
+            hammerX=Math.cos(theta)*distance;
+            //calulate hammer Y
+            hammerY=distance*Math.sin(theta);
+
+            }
+            //calulating the collition system
+            
+           
 
 
 
