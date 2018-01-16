@@ -41,15 +41,18 @@ public class sexcHiker extends JComponent {
     //where the center of the player will be
     int cx, cy;
     //general x and y for the hammer
-    int distanceOfMouseX,distanceOfMouseY;
-    double hammerX,hammerY;
+    int distanceOfMouseX, distanceOfMouseY;
+    double hammerX, hammerY;
     //setting what the distance will be 
-    double distance=0; 
+    double distance = 0;
     //make a hammer 
     Rectangle hammer = new Rectangle(mx, my, 20, 20);
-    //displacement in the x and y direction 
+    //displacement in the x and y direction for player
     int playerDX = 0;
     int playerDY = 0;
+    //displacement in the x and y direction for the hammer
+    int hammerDX = 0;
+    int hammerDY = 0;
     //gavity strenght
     int gravity = 1;
     //controll for player
@@ -58,9 +61,7 @@ public class sexcHiker extends JComponent {
     boolean jump = false;
     boolean onGround = false;
     //make a arry of rectangles
-    Rectangle[]blocks = new Rectangle[5];
-    
-    
+    Rectangle[] blocks = new Rectangle[1];
 
     // GAME VARIABLES END HERE   
     // Constructor to create the Frame and place the panel in
@@ -105,10 +106,14 @@ public class sexcHiker extends JComponent {
         //colour for hammer
         g.setColor(Color.DARK_GRAY);
         //drawing the mouse
-        
 
-        g.fillRect(cx + (int)(hammerX) , cy + (int)(hammerY), 20, 20);
-        //the distance of the hammer
+
+        g.fillRect(cx + (int) (hammerX), cy + (int) (hammerY), 20, 20);
+
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < blocks.length; i++) {
+            g.fillRect(blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height);
+        }
 
         //g.setColor(Color.RED);
         //g.fillRect(player.x + player.width / 2, player.y + player.height / 2, 150, 1);
@@ -121,15 +126,13 @@ public class sexcHiker extends JComponent {
     // This is run before the game loop begins!
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
-        blocks[0]=new Rectangle(0,450, 100, 25);
-        blocks[1]=new Rectangle(200,450, 100, 25);
-        blocks[2]=new Rectangle(150,400, 25, 25);
-        blocks[3]=new Rectangle(50,325, 25, 25);
-        blocks[4]=new Rectangle(400,325, 25, 25);
-        
-        
-        
-        
+
+        blocks[0] = new Rectangle(0, 480, WIDTH, 25);
+
+
+
+
+
     }
 
     // The main game loop
@@ -151,10 +154,21 @@ public class sexcHiker extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
+
+
+            // making the hammer rotate rounf the play useing trig
+
+            //setting cx and cy to the center of the plaayer
+            cx = player.x + player.width / 2;
+            cy = player.y + player.height / 2;
+            //cal the x and y postion for the hammer
+            distanceOfMouseX = mx - cx;
+            distanceOfMouseY = my - cy;
+            // start the the movement system for the player
             if (right) {
-                playerDX = 1;
+                playerDX = 3;
             } else if (left) {
-                playerDX = -1;
+                playerDX = -3;
 
             } else {
                 playerDX = 0;
@@ -166,72 +180,170 @@ public class sexcHiker extends JComponent {
                 playerDY = -10;
                 onGround = false;
             }
+            //add gavity
+            playerDY = playerDY + gravity;
 
-            // making the hammer rotate rounf the play useing trig
-            
-            //setting cx and cy to the center of the plaayer
-            cx = player.x + player.width / 2;
-            cy = player.y + player.height / 2;
-            //cal the x and y postion for the hammer
-            distanceOfMouseX=mx-cx;
-            distanceOfMouseY=my-cy;
-            
-            
-            
-            
-            
-            
+
+
+
+            //update player
+            player.x = player.x + playerDX;
+            player.y = player.y + playerDY;
+
+            //assume that user is falling
+            //onGround = false;
+
+
+            //check for collition
+            //go through each block
+            for (int i = 0; i < blocks.length; i++) {
+                if (player.intersects(blocks[i])) {
+                    int cHeight = Math.min(blocks[i].y + blocks[i].height, player.y + player.height) - Math.max(blocks[i].y, player.y);
+                    int cWidth = Math.min(blocks[i].x + blocks[i].width, player.x + player.width) - Math.max(blocks[i].x, player.x);
+                    //see what is smaller
+                    if (cWidth < cHeight) {
+                        //fix player
+                        //player on left side
+                        if (player.x < blocks[i].x) {
+                            player.x = player.x - cWidth;
+
+                        } else {
+                            player.x = player.x + cWidth;
+                        }
+                        //stop player to move side whys
+                        playerDX = 0;
+                    } else {
+                        //above the block
+                        if (player.y < blocks[i].y) {
+                            player.y = player.y - cHeight;
+                            //moving up or down?
+                            if (playerDY >= 0) {
+                                //stop the down montion
+                                playerDY = 0;
+                                //standing on block
+                                onGround = true;
+                            }
+
+
+                        } else {
+                            player.y = player.y + cHeight;
+
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
             //callulate theta
-            double theta= Math.atan2(distanceOfMouseY,distanceOfMouseX);
-            System.out.println("angle: " + Math.toDegrees(theta));
-            
-            
+            double theta = Math.atan2(distanceOfMouseY, distanceOfMouseX);
+
+
+
             //calulate 
             double hammerRX = 150 * Math.cos(theta);
             double hammerRY = 150 * Math.sin(theta);
             //use soh cah toa to find the distance of hammer x and hammer y
             //find were the mouse is and if it is with in 150 or less than move the mouse useing the distance formula
-            distance=Math.sqrt(distanceOfMouseX*distanceOfMouseX+distanceOfMouseY*distanceOfMouseY);
-            if(distance >= 150){
-                 //calulate hammer x
-            hammerX=Math.cos(theta)*150;
-            //calulate hammer Y
-            hammerY=150*Math.sin(theta);
+            distance = Math.sqrt(distanceOfMouseX * distanceOfMouseX + distanceOfMouseY * distanceOfMouseY);
+            if (distance >= 150) {
+                //calulate hammer x
+                hammerX = Math.cos(theta) * 150;
+                //calulate hammer Y
+                hammerY = 150 * Math.sin(theta);
 
-            }else{
-                      //calulate hammer x
-            hammerX=Math.cos(theta)*distance;
-            //calulate hammer Y
-            hammerY=distance*Math.sin(theta);
+            } else {
+                //calulate hammer x
+                hammerX = Math.cos(theta) * distance;
+                //calulate hammer Y
+                hammerY = distance * Math.sin(theta);
 
             }
-            //calulating the collition system
             
-           
+           hammer.x = (int)hammerX; 
+           hammer.y = (int) hammerY;
+            
+            //calulating the collition system for the hammer
+            for (int i = 0; i <blocks.length ; i++) {
+                if (hammer.intersects(blocks[i])) {
+                    int cHeight = Math.min(blocks[i].y + blocks[i].height, hammer.y + hammer.height) - Math.max(blocks[i].y, hammer.y);
+                    int cWidth = Math.min(blocks[i].x + blocks[i].width, hammer.x + hammer.width) - Math.max(blocks[i].x, hammer.x);
+                    //see what is smaller
+                    if (cWidth < cHeight) {
+                        //fix player
+                        //player on left sode
+                        if (hammer.x < blocks[i].x) {
+                            hammer.x = hammer.x - cWidth;
+                            player.x = player.x - cWidth;
+
+                        } else {
+                            hammer.x = hammer.x + cWidth;
+                            player.x = player.x + cWidth;
+                        }
+                        //stop player to move side whys
+                        hammerDX = 0;
+                        playerDX = 0;
+                    } else {
+                        //above the block
+                        if (hammer.y < blocks[i].y) {
+                            hammer.y = hammer.y - cHeight;
+                            player.y = player.y - cHeight;
+                            //moving up or down?
+                            if (hammerDY >= 0) {
+                                //stop the down montion
+                                hammerDY = 0;
+                                playerDY = 0;
+                                //standing on block
+                                onGround = true;
+                            }
 
 
+                        } else {
+                            hammer.y = hammer.y + cHeight;
+                            player.y =player.y + cHeight;
 
-            // GAME LOGIC ENDS HERE 
-            // update the drawing (calls paintComponent)
-            repaint();
-
-            // SLOWS DOWN THE GAME BASED ON THE FRAMERATE ABOVE
-            // USING SOME SIMPLE MATH
-            deltaTime = System.currentTimeMillis() - startTime;
-            try {
-                if (deltaTime > desiredTime) {
-                    //took too much time, don't wait
-                    Thread.sleep(1);
-                } else {
-                    // sleep to make up the extra time
-                    Thread.sleep(desiredTime - deltaTime);
+                        }
+                    }
                 }
-            } catch (Exception e) {
-            };
-        }
-    }
+            }
+                    
+                    
+                
+            
 
-    // Used to implement any of the Mouse Actions
+
+
+
+
+
+                    // GAME LOGIC ENDS HERE 
+                    // update the drawing (calls paintComponent)
+                    repaint();
+
+                    // SLOWS DOWN THE GAME BASED ON THE FRAMERATE ABOVE
+                    // USING SOME SIMPLE MATH
+                    deltaTime = System.currentTimeMillis() - startTime;
+                    try {
+                        if (deltaTime > desiredTime) {
+                            //took too much time, don't wait
+                            Thread.sleep(1);
+                        } else {
+                            // sleep to make up the extra time
+                            Thread.sleep(desiredTime - deltaTime);
+                        }
+                    } catch (Exception e) {
+                    };
+                }
+            }
+
+            // Used to implement any of the Mouse Actions
+    
+
+    
+
     private class Mouse extends MouseAdapter {
         // if a mouse button has been pressed down
 
