@@ -273,7 +273,7 @@ public class sexcHiker extends JComponent {
                     int cHeight = Math.min(blocks[i].y + blocks[i].height, hammer.y + hammer.height) - Math.max(blocks[i].y, hammer.y);
                     int cWidth = Math.min(blocks[i].x + blocks[i].width, hammer.x + hammer.width) - Math.max(blocks[i].x, hammer.x);
                     //making the block not go through the floor
-                    //make mouse y always greater the blocks[0]'s y
+                    //make hammer y always greater the blocks[0]'s y
                     if (hammer.y > blocks[0].y)  {
                         
                     }
