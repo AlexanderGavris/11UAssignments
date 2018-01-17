@@ -108,7 +108,7 @@ public class sexcHiker extends JComponent {
         //drawing the mouse
 
 
-        g.fillRect(cx + (int) (hammerX), cy + (int) (hammerY), 20, 20);
+        g.fillRect(hammer.x, hammer.y, 20, 20);
 
         g.setColor(Color.BLACK);
         for (int i = 0; i < blocks.length; i++) {
@@ -262,40 +262,46 @@ public class sexcHiker extends JComponent {
                 hammerY = distance * Math.sin(theta);
 
             }
-            
-           hammer.x = (int)hammerX; 
-           hammer.y = (int) hammerY;
-            
+            //refresh hammer
+
+            hammer.x = cx + (int) (hammerX);
+            hammer.y = cy + (int) (hammerY);
+
             //calulating the collition system for the hammer
-            for (int i = 0; i <blocks.length ; i++) {
+            for (int i = 0; i < blocks.length; i++) {
                 if (hammer.intersects(blocks[i])) {
                     int cHeight = Math.min(blocks[i].y + blocks[i].height, hammer.y + hammer.height) - Math.max(blocks[i].y, hammer.y);
                     int cWidth = Math.min(blocks[i].x + blocks[i].width, hammer.x + hammer.width) - Math.max(blocks[i].x, hammer.x);
+                    //making the block not go through the floor
+                    //make mouse y always greater the blocks[0]'s y
+                    if (hammer.y > blocks[0].y)  {
+                        
+                    }
                     //see what is smaller
                     if (cWidth < cHeight) {
                         //fix player
                         //player on left sode
                         if (hammer.x < blocks[i].x) {
                             hammer.x = hammer.x - cWidth;
-                            player.x = player.x - cWidth;
+
 
                         } else {
                             hammer.x = hammer.x + cWidth;
-                            player.x = player.x + cWidth;
+
                         }
                         //stop player to move side whys
                         hammerDX = 0;
-                        playerDX = 0;
+
                     } else {
                         //above the block
                         if (hammer.y < blocks[i].y) {
                             hammer.y = hammer.y - cHeight;
-                            player.y = player.y - cHeight;
+
                             //moving up or down?
                             if (hammerDY >= 0) {
                                 //stop the down montion
                                 hammerDY = 0;
-                                playerDY = 0;
+
                                 //standing on block
                                 onGround = true;
                             }
@@ -303,47 +309,45 @@ public class sexcHiker extends JComponent {
 
                         } else {
                             hammer.y = hammer.y + cHeight;
-                            player.y =player.y + cHeight;
+
 
                         }
                     }
                 }
             }
                     
-                    
-                
-            
+           
 
 
 
 
 
 
-                    // GAME LOGIC ENDS HERE 
-                    // update the drawing (calls paintComponent)
-                    repaint();
 
-                    // SLOWS DOWN THE GAME BASED ON THE FRAMERATE ABOVE
-                    // USING SOME SIMPLE MATH
-                    deltaTime = System.currentTimeMillis() - startTime;
-                    try {
-                        if (deltaTime > desiredTime) {
-                            //took too much time, don't wait
-                            Thread.sleep(1);
-                        } else {
-                            // sleep to make up the extra time
-                            Thread.sleep(desiredTime - deltaTime);
-                        }
-                    } catch (Exception e) {
-                    };
+
+
+
+            // GAME LOGIC ENDS HERE 
+            // update the drawing (calls paintComponent)
+            repaint();
+
+            // SLOWS DOWN THE GAME BASED ON THE FRAMERATE ABOVE
+            // USING SOME SIMPLE MATH
+            deltaTime = System.currentTimeMillis() - startTime;
+            try {
+                if (deltaTime > desiredTime) {
+                    //took too much time, don't wait
+                    Thread.sleep(1);
+                } else {
+                    // sleep to make up the extra time
+                    Thread.sleep(desiredTime - deltaTime);
                 }
-            }
+            } catch (Exception e) {
+            };
+        }
+    }
 
-            // Used to implement any of the Mouse Actions
-    
-
-    
-
+    // Used to implement any of the Mouse Actions
     private class Mouse extends MouseAdapter {
         // if a mouse button has been pressed down
 
