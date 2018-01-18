@@ -63,7 +63,8 @@ public class sexcHiker extends JComponent {
     //make a arry of rectangles
     Rectangle[] blocks = new Rectangle[1];
     // making a var that dosent allow the hammer to pass through
-    int doNotPass=0;
+    boolean hammerCode= false;
+   
 
     // GAME VARIABLES END HERE   
     // Constructor to create the Frame and place the panel in
@@ -234,6 +235,7 @@ public class sexcHiker extends JComponent {
                     }
                 }
             }
+            
 
 
 
@@ -275,10 +277,20 @@ public class sexcHiker extends JComponent {
                     int cHeight = Math.min(blocks[i].y + blocks[i].height, hammer.y + hammer.height) - Math.max(blocks[i].y, hammer.y);
                     int cWidth = Math.min(blocks[i].x + blocks[i].width, hammer.x + hammer.width) - Math.max(blocks[i].x, hammer.x);
                     //making the block not go through the floor
+                    
+                    
+                    
                     //make hammer y always less the blocks[0]'s y
-                    if (hammer.y > blocks[i].y)  {
-                        my=blocks[i].y;
+                    if (hammer.y > blocks[i].height)  {
+                       hammer.y= blocks[i].y - hammer.height;
+                       while (true){
+                           
+                       }
+                        
                          
+                    }
+                    while (hammer.height > blocks[i].y)  {
+                        
                     }
                     //see what is smaller
                     if (cWidth < cHeight) {
