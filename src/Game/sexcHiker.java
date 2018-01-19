@@ -33,7 +33,7 @@ public class sexcHiker extends JComponent {
     long desiredTime = (1000) / desiredFPS;
     // YOUR GAME VARIABLES WOULD GO HERE
     //player var
-    Rectangle player = new Rectangle(80, 400, 40, 80);
+    Rectangle player = new Rectangle(HEIGHT/2, WIDTH/2, 40, 80);
     //make a var the reps my angle
     double theta = 0;
     //where my mouse is
@@ -54,7 +54,7 @@ public class sexcHiker extends JComponent {
     int hammerDX = 0;
     int hammerDY = 0;
     //gavity strenght
-    int gravity = 1;
+    
     //controll for player
     boolean left = false;
     boolean right = false;
@@ -64,6 +64,8 @@ public class sexcHiker extends JComponent {
     Rectangle[] blocks = new Rectangle[1];
     // making a var that dosent allow the hammer to pass through
     boolean hammerCode= false;
+    //make the distance of the displacement to be a var
+    int distanceD=player.x;
    
 
     // GAME VARIABLES END HERE   
@@ -130,7 +132,7 @@ public class sexcHiker extends JComponent {
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
 
-        blocks[0] = new Rectangle(0, 480, WIDTH, 25);
+        blocks[0] = new Rectangle(0, 480, WIDTH, 30 );
 
 
 
@@ -184,7 +186,7 @@ public class sexcHiker extends JComponent {
                 onGround = false;
             }
             //add gavity
-            playerDY = playerDY + gravity;
+           
 
 
 
@@ -208,10 +210,10 @@ public class sexcHiker extends JComponent {
                         //fix player
                         //player on left side
                         if (player.x < blocks[i].x) {
-                            player.x = player.x - cWidth;
+                            distanceD = player.x - cWidth;
 
                         } else {
-                            player.x = player.x + cWidth;
+                            distanceD = player.x + cWidth;
                         }
                         //stop player to move side whys
                         playerDX = 0;
@@ -280,18 +282,9 @@ public class sexcHiker extends JComponent {
                     
                     
                     
-                    //make hammer y always less the blocks[0]'s y
-                    if (hammer.y > blocks[i].height)  {
-                       hammer.y= blocks[i].y - hammer.height;
-                       while (true){
-                           
-                       }
-                        
-                         
-                    }
-                    while (hammer.height > blocks[i].y)  {
-                        
-                    }
+                    System.out.println("h: " + cHeight +  "   w: " + cWidth);
+                    
+                    
                     //see what is smaller
                     if (cWidth < cHeight) {
                         //fix player
