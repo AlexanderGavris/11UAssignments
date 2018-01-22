@@ -15,6 +15,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -54,7 +57,7 @@ public class sexcHiker extends JComponent {
     int hammerDX = 0;
     int hammerDY = 0;
     //gavity strenght
-    
+    int gravity= 1;
     //controll for player
     boolean left = false;
     boolean right = false;
@@ -66,9 +69,29 @@ public class sexcHiker extends JComponent {
     boolean hammerCode= false;
     //make the distance of the displacement to be a var
     int distanceD=player.x;
+    //add colour to the game using image
    
+    BufferedImage pond = loadImage("pond.png");
+    BufferedImage frog = loadImage("frog.png");
+    BufferedImage underwater =loadImage("underwater.jpg");
+    BufferedImage fly =loadImage("fly.png");
+    
 
     // GAME VARIABLES END HERE   
+    
+    
+    public BufferedImage loadImage(String name){
+        BufferedImage img = null;
+        try{
+            img = ImageIO.read(new File(name));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return img;
+    }
+    
+    
+    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public sexcHiker() {
@@ -106,19 +129,25 @@ public class sexcHiker extends JComponent {
 
         // GAME DRAWING GOES HERE
         //coulor for player
+        //background
+        g.drawImage(pond, 0, 0, WIDTH, HEIGHT-100, null);
+        
+        
         g.setColor(Color.BLUE);
-        g.fillRect(player.x, player.y, player.width, player.height);
+        //draw the frog
+        g.drawImage(frog,player.x, player.y, player.width, player.height,null);
         //colour for hammer
         g.setColor(Color.DARK_GRAY);
         //drawing the mouse
 
 
-        g.fillRect(hammer.x, hammer.y, 20, 20);
+        g.drawImage(fly,hammer.x, hammer.y, 30, 30,null);
 
         g.setColor(Color.BLACK);
         for (int i = 0; i < blocks.length; i++) {
             g.fillRect(blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height);
         }
+        g.drawImage(underwater,blocks[0].x, blocks[0].y, blocks[0].width, blocks[0].height,null);
 
         //g.setColor(Color.RED);
         //g.fillRect(player.x + player.width / 2, player.y + player.height / 2, 150, 1);
@@ -131,8 +160,9 @@ public class sexcHiker extends JComponent {
     // This is run before the game loop begins!
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
+        //if the width of the log is greater than the width rest the log to 600( the other side of the sreen
 
-        blocks[0] = new Rectangle(0, 480, WIDTH, 30 );
+        blocks[0] = new Rectangle(0, 480, WIDTH, 125 );
 
 
 
@@ -186,7 +216,7 @@ public class sexcHiker extends JComponent {
                 onGround = false;
             }
             //add gavity
-           
+           playerDY= playerDY + gravity;
 
 
 
@@ -316,7 +346,7 @@ public class sexcHiker extends JComponent {
 
 
                         } else {
-                            hammer.y = hammer.y + cHeight;
+                            hammer.y = hammer.y - (hammer.y-blocks[i].y) - 30;
 
 
                         }
