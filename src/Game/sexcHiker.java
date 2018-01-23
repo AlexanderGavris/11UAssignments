@@ -43,9 +43,14 @@ public class sexcHiker extends JComponent {
     int mx, my;
     //where the center of the player will be
     int cx, cy;
+    //center of hammer
+    int cHX,cHY;
     //general x and y for the hammer
     int distanceOfMouseX, distanceOfMouseY;
+    //general x and y for the hammer but useing the fly
+    int distanceOfMouseFX, distanceOfMouseFY;
     double hammerX, hammerY;
+    double hammerXF, hammerYF;
     //setting what the distance will be 
     double distance = 0;
     //make a hammer 
@@ -196,9 +201,17 @@ public class sexcHiker extends JComponent {
             //setting cx and cy to the center of the plaayer
             cx = player.x + player.width / 2;
             cy = player.y + player.height / 2;
+            //calulate the center of the hammer for x and y
+            cHX=hammer.y + hammer.width / 2;
+            cHY=hammer.y + hammer.width /2;
+            
             //cal the x and y postion for the hammer
             distanceOfMouseX = mx - cx;
             distanceOfMouseY = my - cy;
+            //calulate the x and y postion for the hammer but use the center of the hammer not the player
+            distanceOfMouseFX = mx - cHX;
+            distanceOfMouseFY = my - cHY;
+            
             // start the the movement system for the player
             if (right) {
                 playerDX = 3;
@@ -267,7 +280,17 @@ public class sexcHiker extends JComponent {
                     }
                 }
             }
-            
+            //make the the player rotate the hammer
+            //callulate theta for the fly
+            double thetaF = Math.atan2(distanceOfMouseFY, distanceOfMouseFX);
+            //calulate
+            double hammerRXF = 150 * Math.cos(thetaF);
+            double hammerRYF = 150 * Math.sin(thetaF);
+            //use soh cah toa to find the distance of hammer x and hammer y
+            //calulate hammer x
+                hammerXF = Math.cos(thetaF) * 150;
+                //calulate hammer Y
+                hammerYF = 150 * Math.sin(thetaF);
 
 
 
