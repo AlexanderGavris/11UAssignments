@@ -58,6 +58,8 @@ public class sexcHiker extends JComponent {
     //displacement in the x and y direction for player
     int playerDX = 0;
     int playerDY = 0;
+    //the amount that the fly is being is being displaced
+    
     //displacement in the x and y direction for the hammer
     int hammerDX = 0;
     int hammerDY = 0;
@@ -80,6 +82,15 @@ public class sexcHiker extends JComponent {
     BufferedImage frog = loadImage("frog.png");
     BufferedImage underwater =loadImage("underwater.jpg");
     BufferedImage fly =loadImage("fly.png");
+    BufferedImage log=loadImage("log.png");
+    //ball
+    int ballSize = 60;
+    Rectangle ball = new Rectangle(600, 420,ballSize,ballSize);
+    int ballXDirection= -1;
+    int ballYDirection=0;
+    int ballSpeed=4;
+    //making ball go faster
+    double ballFaster= 0.2;
     
 
     // GAME VARIABLES END HERE   
@@ -143,7 +154,9 @@ public class sexcHiker extends JComponent {
         g.drawImage(frog,player.x, player.y, player.width, player.height,null);
         //colour for hammer
         g.setColor(Color.DARK_GRAY);
-        //drawing the mouse
+        
+        //draw flay
+        g.drawImage(log,ball.x, ball.y, 30, 30,null);
 
 
         g.drawImage(fly,hammer.x, hammer.y, 30, 30,null);
@@ -153,6 +166,7 @@ public class sexcHiker extends JComponent {
             g.fillRect(blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height);
         }
         g.drawImage(underwater,blocks[0].x, blocks[0].y, blocks[0].width, blocks[0].height,null);
+        g.fillRect(ball.x, ball.y, ball.width, ball.height);
 
         //g.setColor(Color.RED);
         //g.fillRect(player.x + player.width / 2, player.y + player.height / 2, 150, 1);
@@ -194,7 +208,15 @@ public class sexcHiker extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-
+            ball.x=ball.x+ballXDirection*ballSpeed;
+            //make ball go back
+            if (ball.x<0 ) {
+                ball.x=WIDTH;
+            }
+            //make ball go faster
+            ballSpeed=ballSpeed+(int)(ballFaster);
+            
+            
 
             // making the hammer rotate rounf the play useing trig
 
@@ -288,9 +310,9 @@ public class sexcHiker extends JComponent {
             double hammerRYF = 150 * Math.sin(thetaF);
             //use soh cah toa to find the distance of hammer x and hammer y
             //calulate hammer x
-                hammerXF = Math.cos(thetaF) * 150;
+            hammerXF = Math.cos(thetaF) * 150;
                 //calulate hammer Y
-                hammerYF = 150 * Math.sin(thetaF);
+            hammerYF = 150 * Math.sin(thetaF);
 
 
 
