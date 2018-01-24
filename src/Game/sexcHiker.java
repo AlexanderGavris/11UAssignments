@@ -77,7 +77,7 @@ public class sexcHiker extends JComponent {
     Rectangle[] blocks = new Rectangle[1];
     //6 leafs in a arrt 
     Rectangle[] leafs = new Rectangle[6];
-    
+    Random rand = new Random();
 
     //make the distance of the displacement to be a var
     int distanceD = player.x;
@@ -88,6 +88,8 @@ public class sexcHiker extends JComponent {
     BufferedImage underwater = loadImage("underwater.png");
     BufferedImage flyboyfly = loadImage("fly.png");
     BufferedImage log = loadImage("log.png");
+    BufferedImage Leafs = loadImage("Leaf.png");
+    
     //ball
     int ballSize = 60;
     Rectangle ball = new Rectangle(600, 420, ballSize, ballSize);
@@ -157,6 +159,7 @@ public class sexcHiker extends JComponent {
         //coulor for player
         //background
         g.drawImage(pond, 0, 0, WIDTH, HEIGHT - 100, null);
+        g.drawImage(Leafs, 0, 0, leafs, HEIGHT - 100, null);
 
         g.setColor(Color.RED);
         g.setFont(biggerFont);
@@ -183,6 +186,7 @@ public class sexcHiker extends JComponent {
         if (player.intersects(ball)) {
             g.drawString("GAME OVER", WIDTH / 2 - 200, 150);
         }
+        
 
         //g.setColor(Color.RED);
         //g.fillRect(player.x + player.width / 2, player.y + player.height / 2, 150, 1);
@@ -198,12 +202,12 @@ public class sexcHiker extends JComponent {
         blocks[0] = new Rectangle(0, 480, WIDTH, 125);
         
         
-        leafs[0] = new Rectangle(0, 0, 10, 10);
-        leafs[1] = new Rectangle(0, 375, 10, 10);
-        leafs[2] = new Rectangle(0, 100, 10, 10);
-        leafs[3] = new Rectangle(0, 25, 10, 10);
-        leafs[4] = new Rectangle(0, 500, 10, 10);
-        leafs[5] = new Rectangle(0, 250, 10, 10);
+        leafs[0] = new Rectangle(rand.nextInt(WIDTH - 10), 0, 10, 10);
+        leafs[1] = new Rectangle(0, -10, 10, 10);
+        leafs[2] = new Rectangle(0, -10, 10, 10);
+        leafs[3] = new Rectangle(0, -10, 10, 10);
+        leafs[4] = new Rectangle(0, -10, 10, 10);
+        leafs[5] = new Rectangle(0, -10, 10, 10);
         
 
     }
@@ -232,10 +236,18 @@ public class sexcHiker extends JComponent {
             if (ball.x < 0) {
                 ball.x = WIDTH;
             }
-             leafs[0].x = leafs[0].y + leafYDirection * leafSpeed;
-            //make ball go back
-            if (leafs[0].y < 0) {
-                leafs[0].y = HEIGHT;
+             
+            for(int i = 0; i < leafs.length; i++){
+                leafs[i].y += 3;
+                if (player.intersects(leafs[i])) {
+                    points++;
+                    leafs[i].x=rand.nextInt(WIDTH-10);
+                    leafs[i].y=-10;
+                }
+                if(leafs[i].y>HEIGHT){
+                    leafs[i].x=rand.nextInt(WIDTH-10);
+                    leafs[i].y=-10;
+                }
             }
             
             
@@ -245,9 +257,9 @@ public class sexcHiker extends JComponent {
             
             
             // ball hit left side of screen
-            if(ball.x > HEIGHT){
+            if(ball.x < 2){
                 points++;
-                ballSpeed = (int) (1 + Math.floor(points / 50));
+                ballSpeed += ((points / 10) * 2);
             }
 
             // making the hammer rotate rounf the play useing trig
