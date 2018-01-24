@@ -4,6 +4,7 @@
  */
 package Game;
 
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JComponent;
@@ -18,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Random;
 import javax.imageio.ImageIO;
 
 /**
@@ -73,7 +75,10 @@ public class sexcHiker extends JComponent {
     boolean onGround = false;
     //make a arry of rectangles
     Rectangle[] blocks = new Rectangle[1];
+    //6 leafs in a arrt 
+    Rectangle[] leafs = new Rectangle[6];
     
+
     //make the distance of the displacement to be a var
     int distanceD = player.x;
     //add colour to the game using image
@@ -89,13 +94,18 @@ public class sexcHiker extends JComponent {
     int ballXDirection = -1;
     int ballYDirection = 0;
     int ballSpeed = 4;
-    //making ball go faster
-    double ballFaster = 0.2;
-    //game over 
-    int gameover;
+    //leaf
+    int leafXDirection = 0;
+    int leafYDirection = 1;
+    int leafSpeed = 1;
+    
     //font
     Font biggerFont = new Font("arial", Font.BOLD, 42);
     Font bigistFont = new Font("arial", Font.BOLD, 70);
+    Font pointFont = new Font("arial", Font.BOLD, 30);
+
+    // points start at 0 
+    int points = 0;
 
     // GAME VARIABLES END HERE   
     public BufferedImage loadImage(String name) {
@@ -148,14 +158,15 @@ public class sexcHiker extends JComponent {
         //background
         g.drawImage(pond, 0, 0, WIDTH, HEIGHT - 100, null);
 
-        g.setColor(Color.BLUE);
+        g.setColor(Color.RED);
+        g.setFont(biggerFont);
+        g.drawString("" + points, 20, 50);
         //draw the frog
         g.drawImage(frog, player.x, player.y, player.width, player.height, null);
         //colour for hammer
-        
 
         //draw log
-        g.drawImage(log, ball.x, ball.y, 30, 30, null);
+        g.drawImage(log, ball.x, ball.y, 50, 50, null);
 
         g.drawImage(flyboyfly, fly.x, fly.y, 30, 30, null);
 
@@ -164,10 +175,10 @@ public class sexcHiker extends JComponent {
             g.fillRect(blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height);
         }
         g.drawImage(underwater, blocks[0].x, blocks[0].y, blocks[0].width, blocks[0].height, null);
-        g.fillRect(ball.x, ball.y, ball.width, ball.height);
+       
         // draw gameover
         g.setFont(biggerFont);
-        g.drawString("Leap Frocka", WIDTH / 2 - 100, 50);
+        g.drawString("LEAP FROG", WIDTH / 2 - 100, 50);
         g.setFont(bigistFont);
         if (player.intersects(ball)) {
             g.drawString("GAME OVER", WIDTH / 2 - 200, 150);
@@ -182,9 +193,18 @@ public class sexcHiker extends JComponent {
     // This is run before the game loop begins!
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
-        //if the width of the log is greater than the width rest the log to 600( the other side of the sreen
+       
 
         blocks[0] = new Rectangle(0, 480, WIDTH, 125);
+        
+        
+        leafs[0] = new Rectangle(0, 0, 10, 10);
+        leafs[1] = new Rectangle(0, 375, 10, 10);
+        leafs[2] = new Rectangle(0, 100, 10, 10);
+        leafs[3] = new Rectangle(0, 25, 10, 10);
+        leafs[4] = new Rectangle(0, 500, 10, 10);
+        leafs[5] = new Rectangle(0, 250, 10, 10);
+        
 
     }
 
@@ -212,8 +232,23 @@ public class sexcHiker extends JComponent {
             if (ball.x < 0) {
                 ball.x = WIDTH;
             }
+             leafs[0].x = leafs[0].y + leafYDirection * leafSpeed;
+            //make ball go back
+            if (leafs[0].y < 0) {
+                leafs[0].y = HEIGHT;
+            }
+            
+            
+            
             //make ball go faster
-            ballSpeed = ballSpeed + (int) (ballFaster);
+            
+            
+            
+            // ball hit left side of screen
+            if(ball.x > HEIGHT){
+                points++;
+                ballSpeed = (int) (1 + Math.floor(points / 50));
+            }
 
             // making the hammer rotate rounf the play useing trig
             //setting cx and cy to the center of the plaayer
@@ -257,7 +292,7 @@ public class sexcHiker extends JComponent {
                     playerDX = 0;
 
                 }
-                playerDY=0;
+                playerDY = 0;
 
             }
 
@@ -304,18 +339,8 @@ public class sexcHiker extends JComponent {
                     }
                 }
             }
-            //make the the player rotate the hammer
-            //callulate theta for the fly
-            double thetaF = Math.atan2(distanceOfMouseFY, distanceOfMouseFX);
-            //calulate
-            double hammerRXF = 150 * Math.cos(thetaF);
-            double hammerRYF = 150 * Math.sin(thetaF);
-            //use soh cah toa to find the distance of hammer x and hammer y
-            //calulate hammer x
-            hammerXF = Math.cos(thetaF) * 150;
-            //calulate hammer Y
-            hammerYF = 150 * Math.sin(thetaF);
-
+           
+            
             //callulate theta
             double theta = Math.atan2(distanceOfMouseY, distanceOfMouseX);
 
@@ -407,7 +432,8 @@ public class sexcHiker extends JComponent {
             };
         }
     }
-
+   
+    
     // Used to implement any of the Mouse Actions
     private class Mouse extends MouseAdapter {
         // if a mouse button has been pressed down
