@@ -88,7 +88,9 @@ public class sexcHiker extends JComponent {
     BufferedImage underwater = loadImage("underwater.png");
     BufferedImage flyboyfly = loadImage("fly.png");
     BufferedImage log = loadImage("log.png");
-    BufferedImage Leafs = loadImage("Leaf.png");
+    BufferedImage leaf = loadImage("Leaf.png");
+    
+   
     
     //ball
     int ballSize = 60;
@@ -159,7 +161,15 @@ public class sexcHiker extends JComponent {
         //coulor for player
         //background
         g.drawImage(pond, 0, 0, WIDTH, HEIGHT - 100, null);
-        g.drawImage(Leafs, 0, 0, leafs, HEIGHT - 100, null);
+        //draw the leafs in
+        g.setColor(Color.GREEN);
+        for (int i = 0; i < leafs.length; i++) {
+        //g.drawRect(leafs[i].x, leafs[i].y, 10, 10);
+        g.drawImage(leaf, leafs[i].x, leafs[i].y, 10, 10, null);
+        
+            
+        }
+       
 
         g.setColor(Color.RED);
         g.setFont(biggerFont);
@@ -173,7 +183,7 @@ public class sexcHiker extends JComponent {
 
         g.drawImage(flyboyfly, fly.x, fly.y, 30, 30, null);
 
-        g.setColor(Color.BLACK);
+        g.setColor(Color.BLUE);
         for (int i = 0; i < blocks.length; i++) {
             g.fillRect(blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height);
         }
@@ -236,10 +246,10 @@ public class sexcHiker extends JComponent {
             if (ball.x < 0) {
                 ball.x = WIDTH;
             }
-             
+             //make leafs fall down
             for(int i = 0; i < leafs.length; i++){
                 leafs[i].y += 3;
-                if (player.intersects(leafs[i])) {
+                if (fly.intersects(leafs[i])) {
                     points++;
                     leafs[i].x=rand.nextInt(WIDTH-10);
                     leafs[i].y=-10;
@@ -295,16 +305,22 @@ public class sexcHiker extends JComponent {
             }
             //add gavity
             playerDY = playerDY + gravity;
-            //colition for the player if the frog hits the ball
+            //colition for the player if the frog hits the log
             if (player.intersects(ball)) {
                 ballSpeed = 0;
                 if (right) {
                     playerDX = 0;
                 } else if (left) {
                     playerDX = 0;
+                    
 
                 }
                 playerDY = 0;
+                for (int i = 0; i < leafs.length; i++) {
+               
+                    leafs[i].y=-10;
+                }
+                
 
             }
 
